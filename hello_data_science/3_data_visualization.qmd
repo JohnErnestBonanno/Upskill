@@ -55,3 +55,88 @@ ggplot(
 ## Notes on Box Plot:
 
 ![](fig-boxplot-1.png)
+
+## Visualizing Two Variables
+
+```{r}
+ggplot(
+  data=atus_college,
+  aes(x=employment,
+      fill=enrollment)
+) + geom_bar()
+
+```
+
+```{r}
+ggplot(
+  data=atus_college,
+  aes(x=employment,
+      fill=enrollment)
+) + geom_bar(position = "fill")
+
+```
+
+```{r}
+ggplot(
+  data = atus_college, 
+  aes(
+    x = employment,
+    fill = enrollment
+  )
+) +
+  geom_bar(position = "dodge")
+```
+
+## Visualizing Two Numeric Variables
+
+```{r}
+ggplot(
+  data=atus_college,
+  aes(
+    x=time_alone,
+    y=weekly_earnings
+  )
+  ) + 
+  geom_point()
+```
+
+## Visualizing a Numerical and a Cateogorical Variable
+
+```{r}
+ggplot(
+  data = atus_college, 
+  aes(
+    x = employment,
+    y = weekly_earnings
+  )
+) +
+  geom_boxplot()
+```
+
+## Visualizing More Than Two Variables
+
+```{r}
+ggplot(
+  data = atus_college,
+  aes(
+    x = time_alone,
+    y = weekly_earnings,
+    color = employment,
+    shape = employment
+  )
+) +
+  geom_point()
+```
+```{r}
+ggplot(
+  data = atus_college,
+  aes(
+    x = time_alone,
+    y = weekly_earnings,
+    color = employment,
+    size = work_time
+  ) 
+) +
+  geom_point()
+```
+
