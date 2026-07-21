@@ -1,0 +1,57 @@
+---
+title: "3_data_visualization"
+author: "JB"
+format: html
+editor: visual
+---
+
+## About the Data
+
+This chapter's data will focus on American Time Use Survey Data on how American spend their time.
+
+## Imports
+
+```{r}
+library(hellodatascience)
+library(tidyverse)
+```
+
+## Data Load
+
+```{r}
+data("atus_college")
+glimpse(atus_college)
+
+?atus_college
+```
+
+## Visualizing a Single Variable
+
+```{r}
+#with proper syntax formatting
+ggplot(
+  data = atus_college, 
+  aes(x=employment)
+) + 
+  geom_bar()
+```
+
+```{r}
+ggplot(
+  data=atus_college,
+  aes(x=weekly_earnings)
+) +
+  geom_histogram(binwidth = 50)
+```
+
+```{r}
+ggplot(
+  data = atus_college,
+  aes(y=weekly_earnings)
+) + 
+  geom_boxplot()
+```
+
+## Notes on Box Plot:
+
+![](fig-boxplot-1.png)
