@@ -1,0 +1,18 @@
+---
+title: "My First Quatro"
+author: "JB"
+format: html
+editor: visual
+---
+
+### 
+
+In this report, lets' try some Quatro!
+
+```{r}
+my_apples <- 5
+```
+
+I have `r my_apples` apples! That's a lot of apples!
+
+
