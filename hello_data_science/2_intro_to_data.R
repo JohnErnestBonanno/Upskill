@@ -10,3 +10,10 @@ ncol(planets)
 ?planets
 
 #2.2 Getting to know data
+
+#eda commands 
+
+head(planets)
+tail(planets)
+
+glimpse(planets)
