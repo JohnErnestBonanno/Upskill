@@ -1,0 +1,210 @@
+---
+title: "4_accessible_data_representation"
+format: html
+editor: visual
+---
+
+Goals
+
+## 4.1 Improve Data Visualizations
+
+
+```{r}
+#Imports
+
+library(hellodatascience)
+library(tidyverse)
+
+```
+
+```{r}
+base_bar_plot <-
+  ggplot(
+    data = atus_college, 
+    aes(
+      x = employment, 
+      fill = enrollment
+    )
+  ) +
+  geom_bar(position = "dodge")
+
+base_bar_plot
+```
+
+## 4.2 Labels
+
+```{r}
+labeled_bar_plot <- 
+  base_bar_plot + 
+  labs(
+    title = "Student Count by Employment and Enrollment Status",
+    subtitle = "Most students work part-time while enrolled full-time",
+    x = "Employment Status",
+    y = "Number of Students",
+    fill = "Course Enrollment",
+    caption = "Data source: American Time Use Survey 2024 (n = 312 students)"
+  )
+
+labeled_bar_plot
+```
+
+## 4.1.2 Themes
+
+```{r}
+labeled_bar_plot
+
+improved_bar_plot <- 
+  labeled_bar_plot +
+  theme_minimal()
+
+improved_bar_plot
+```
+
+Other themes include: 
+* theme_bw()
+* theme_light() 
+* theme_dark()
+* theme_minimal()
+* theme_classic()
+
+```{r}
+improved_bar_plot <-
+  improved_bar_plot + 
+#manually adjust text size
+  theme(
+    plot.title = element_text(size = 18),
+    plot.subtitle = element_text(size = 14),
+    axis.title = element_text(size = 12), 
+    axis.text = element_text(size = 10), 
+    legend.title = element_text(size = 11),
+    legend.text = element_text(size = 9), 
+    plot.caption = element_text(size = 8),
+    #Adjust Legend
+    legend.position = "top"
+  ) +
+labs(title = "Student Count by Employment and\n Enrollment Status")
+
+improved_bar_plot
+
+```
+
+## 4.1.3 Choice of Color
+
+colors() lists all options R accepts
+* but can also use HEX
+
+Remember to pick colors that work for people who might be color blind
+
+Okabe-Ito Color Pallete
+
+```{r}
+palette.colors(palette = "Okabe-Ito")
+```
+
+
+```{r}
+improved_bar_plot <-
+  improved_bar_plot +
+    scale_fill_manual(
+      values = c(
+       "Full Time" = "#009E73", #R Studio previews the color for you
+       "Part Time" = "#CC79A7" #Which is very cool
+    )
+  )
+
+improved_bar_plot
+```
+
+
+## Additional Style Elements 
+
+```{r}
+simple_scatterplot <- 
+  ggplot(
+    data = atus_college,
+    aes(
+      x = time_alone,
+      y = weekly_earnings
+    )
+  ) +
+  geom_point() +
+  labs(
+    x = "Time Alone (minutes)",
+    y = "Weekly Earnings ($)"
+  ) +
+  theme_bw()
+
+simple_scatterplot
+```
+
+```{r}
+colored_scatterplot <- 
+  simple_scatterplot +
+  geom_point(
+    color = "aquamarine4", #Also works for color Name
+    size = 4,
+    shape = "square"
+  )
+
+colored_scatterplot
+```
+
+```{r}
+ggplot(
+  data = atus_college, 
+  aes(x = employment)
+) +
+  geom_bar(fill ="purple")
+```
+
+## 4.1.5 Facets
+
+```{r}
+simple_scatterplot +
+  facet_grid(rows = vars(employment), 
+             cols = vars(enrollment))
+```
+
+##  4.2 Data Verbalization
+
+
+using labels' "alt" creaes alt text 
+
+```{r}
+improved_bar_plot +
+  labs(
+    alt = "Barplot showing student count by employment and enrollment status. The y-axis shows number of students from 0 to 80, and the x-axis shows employment status (Full Time, Part Time, NA). Each employment status is broken down by full time or part time enrollment status. The plot displays six bars: students enrolled full time with full time employment (approximately 70 students), part time employment (apprximately 75 students), and unknown employment (approximately 80 students) as well as students enrolled part time with full time employment (approxmately 60 students), part time employment (approximately 18 students), and unknown employment (approximately 15 students). Data source: American Time Use Survey 2024 (n = 312 students)."
+  )
+```
+
+##  4.2 Data Sonification
+
+```{r}
+x <- 1:10
+y <- 1:10
+
+simple_plot <-
+  ggplot(
+    data = data.frame(x = x, y = y),
+    aes(x = x,  y = y)) +
+  geom_point()
+
+simple_plot
+```
+
+install.packages("package_name")
+```{r}
+#Allows you to "listen" to the data
+sonify::sonify(x, y)
+```
+
+
+## Bonus - Can insert code in other languages like Python or SQL
+
+```{python}
+print("hello world")
+```
+
+
+
+The `echo: false` option disables the printing of code (only output is displayed).
